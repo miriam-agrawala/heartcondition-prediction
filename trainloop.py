@@ -45,7 +45,7 @@ class Trainer:
       lstm = self.network(batch)
 
       # Reshape labels for processing
-      labels = labels#.reshape
+      labels = labels.view(-1)#.reshape
 
       # Calculcate the (BCE)-Loss
       loss = self.loss_function(lstm, labels)
@@ -71,4 +71,28 @@ class Trainer:
           # Step the optimizer
           self.optim.step()
 
+          #self.validate(val_dataloader)     
+
     return 1000.0 * total_loss / cnt, 100.0*correct/cnt
+
+  def validate(self, val_dataloader):
+        # Switch to evaluation mode
+        self.network.eval()
+        total_loss = 0
+        correct = 0
+        cnt = 0
+        with torch.no_grad():
+            for batch, labels in val_dataloader:
+                # Forward pass
+                outputs = self.network(batch)
+                # Calculate the loss
+                loss = self.loss_function(outputs, labels)
+                # Sum the total loss
+                total_loss += loss.item()
+                # Count how many correct predictions we have (for accuracy)
+                correct += torch.sum(torch.argmax(outputs, dim=1) == labels).item()
+                # Count total samples processed
+                cnt += batch.shape[0]
+
+        # Print validation loss and accuracy
+        print(f'Validation Loss: {total_loss/cnt}, Validation Accuracy: {correct/cnt}')

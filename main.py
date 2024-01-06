@@ -1,4 +1,4 @@
-from dataset import ECGDataset, DEVICE
+from dataset import ECGDatasetUpdate, DEVICE
 from torch.utils.data import Dataset, DataLoader
 from lstm2 import LSTM2
 from trainloop import Trainer
@@ -14,7 +14,7 @@ if __name__ == "__main__":
     # dataset = DummyDataset(num_samples, sequence_length, num_features, num_classes, device)
     # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    dataset = ECGDataset(seqlen=4)
+    dataset = ECGDatasetUpdate(seqlen=4)
 
 
     dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
