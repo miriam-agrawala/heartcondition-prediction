@@ -77,3 +77,19 @@ data_one_scp_df.loc[data_one_scp_df["diagnostic_class_numerical"] == "MI", "diag
 print(data_one_scp_df.head(5))
 
 prelim_featurevector = pd.DataFrame(data_one_scp_df).to_numpy()
+
+# train/val split
+
+from sklearn.model_selection import train_test_split
+
+unique_patient_ids = data_one_scp_df["patient_id"].unique()
+train_ids, val_ids = train_test_split(unique_patient_ids, test_size=0.2, random_state=0)
+
+train_df = data_one_scp_df[data_one_scp_df["patient_id"].isin(train_ids)]
+val_df = data_one_scp_df[data_one_scp_df["patient_id"].isin(val_ids)]
+
+print(f"Training set size: {train_df.shape}")
+print(f"Validation set size: {val_df.shape}")
+
+train_featurevector = pd.DataFrame(train_df).to_numpy()
+val_featurevector = pd.DataFrame(val_df).to_numpy()

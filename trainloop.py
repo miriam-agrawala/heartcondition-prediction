@@ -75,16 +75,20 @@ class Trainer:
 
     return 1000.0 * total_loss / cnt, 100.0*correct/cnt
 
-  def validate(self, val_dataloader):
+  def validate(self, val_dataloader, epoch=0):
+        
+        bar = tqdm.tqdm(val_dataloader)
         # Switch to evaluation mode
         self.network.eval()
         total_loss = 0
         correct = 0
         cnt = 0
         with torch.no_grad():
-            for batch, labels in val_dataloader:
+            for batch, labels in bar:
                 # Forward pass
                 outputs = self.network(batch)
+                # Reshape labels to be 1D
+                labels = labels.view(-1)
                 # Calculate the loss
                 loss = self.loss_function(outputs, labels)
                 # Sum the total loss
@@ -93,6 +97,8 @@ class Trainer:
                 correct += torch.sum(torch.argmax(outputs, dim=1) == labels).item()
                 # Count total samples processed
                 cnt += batch.shape[0]
+
+                bar.set_description(f"ep: {epoch:.0f} (val), loss: {1000.0*total_loss / cnt:.3f}, acc: {100.0*correct/cnt:.2f}%")
 
         # Print validation loss and accuracy
         print(f'Validation Loss: {total_loss/cnt}, Validation Accuracy: {correct/cnt}')

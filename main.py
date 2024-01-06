@@ -1,4 +1,5 @@
 from dataset import ECGDatasetUpdate, DEVICE
+from import_data import train_featurevector, val_featurevector
 from torch.utils.data import Dataset, DataLoader
 from lstm2 import LSTM2
 from trainloop import Trainer
@@ -14,10 +15,14 @@ if __name__ == "__main__":
     # dataset = DummyDataset(num_samples, sequence_length, num_features, num_classes, device)
     # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    dataset = ECGDatasetUpdate(seqlen=4)
+    train_dataset = ECGDatasetUpdate(train_featurevector)
+    val_dataset = ECGDatasetUpdate(val_featurevector)
 
 
-    dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+    #dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
+
     # for batch in dataloader:
     #   data_batch, label_batch = batch
 
@@ -30,5 +35,22 @@ if __name__ == "__main__":
     #trainer.epoch(dataloader, net, True)
 
     num_epochs = 100  # number of epochs
+    # for epoch in range(num_epochs):
+    #     trainer.epoch(dataloader, net, True)
+    
     for epoch in range(num_epochs):
-        trainer.epoch(dataloader, net, True)
+        # Training phase
+        trainer.epoch(train_loader, True, epoch)
+
+        # Validation phase
+        trainer.validate(val_loader, epoch)
+        # net.eval()  # set the model to evaluation mode
+        # total_val_loss = 0
+        # with torch.no_grad():  # disable gradient computation
+        #     for batch, labels in val_loader:
+        #         batch, labels = batch.to(DEVICE), labels.to(DEVICE)
+        #         outputs = net(batch)  # forward pass
+        #         val_loss = loss(outputs, labels)  # compute the validation loss
+        #         total_val_loss += val_loss.item()
+
+        # avg_val_loss = total_val_loss / len(val_loader)  # compute the average validation loss
