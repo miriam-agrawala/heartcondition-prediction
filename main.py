@@ -1,4 +1,4 @@
-from dataset import ECGDatasetUpdate, DEVICE
+from dataset import ECGDatasetUpdate, DEVICE, ECGDataset200ms
 from import_data import train_featurevector, val_featurevector
 from torch.utils.data import Dataset, DataLoader
 from lstm2 import LSTM2
@@ -15,12 +15,18 @@ if __name__ == "__main__":
     # dataset = DummyDataset(num_samples, sequence_length, num_features, num_classes, device)
     # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    train_dataset = ECGDatasetUpdate(train_featurevector)
-    val_dataset = ECGDatasetUpdate(val_featurevector)
+    print("Loading trainset...")
+    train_dataset = ECGDataset200ms(train_featurevector)
+   
+    print("Loading valset...")
+    val_dataset = ECGDataset200ms(val_featurevector)
 
 
     #dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+    batch = next(iter(train_loader))
+    print(batch[0].shape)
+    print(batch[1].shape)
     val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
 
     # for batch in dataloader:
@@ -28,7 +34,7 @@ if __name__ == "__main__":
 
     #   # Move the data batch to the same device as the model
     #   data_batch, label_batch = data_batch.to(device), label_batch.to(device)
-    net = Net().to(DEVICE)
+    net = LSTM2().to(DEVICE)
     loss = torch.nn.CrossEntropyLoss()
 
     trainer = Trainer(net, loss)
