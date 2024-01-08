@@ -26,9 +26,7 @@ class Trainer:
     if training:
       self.network.train()
       name="train"
-    else:
-      self.network.eval()
-      name="val"
+
 
     # This epoch starts
     total_loss = 0

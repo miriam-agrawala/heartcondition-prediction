@@ -9,5 +9,6 @@ class LSTM2(nn.Module):
         self.fc = nn.Linear(128,5)
 
     def forward(self, x):
+        
         out, hidden = self.lstm(x)
         return self.fc(out[:,-1,:])

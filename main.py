@@ -16,10 +16,10 @@ if __name__ == "__main__":
     # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     print("Loading trainset...")
-    train_dataset = ECGDataset200ms(train_featurevector)
+    train_dataset = ECGDatasetUpdate(train_featurevector)
    
     print("Loading valset...")
-    val_dataset = ECGDataset200ms(val_featurevector)
+    val_dataset = ECGDatasetUpdate(val_featurevector)
 
 
     #dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     #   # Move the data batch to the same device as the model
     #   data_batch, label_batch = data_batch.to(device), label_batch.to(device)
-    net = LSTM2().to(DEVICE)
+    net = Net().to(DEVICE)
     loss = torch.nn.CrossEntropyLoss()
 
     trainer = Trainer(net, loss)
