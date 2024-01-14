@@ -6,6 +6,10 @@ from trainloop import Trainer
 from lstm_conv import Net
 import torch
 
+from torch.utils.tensorboard import SummaryWriter  
+
+writer = SummaryWriter()
+
 
 if __name__ == "__main__":
     # num_samples = 96
@@ -37,7 +41,7 @@ if __name__ == "__main__":
     net = Net().to(DEVICE)
     loss = torch.nn.CrossEntropyLoss()
 
-    trainer = Trainer(net, loss)
+    trainer = Trainer(net, loss, writer)
     #trainer.epoch(dataloader, net, True)
 
     num_epochs = 100  # number of epochs
@@ -60,3 +64,4 @@ if __name__ == "__main__":
         #         total_val_loss += val_loss.item()
 
         # avg_val_loss = total_val_loss / len(val_loader)  # compute the average validation loss
+    trainer.save_checkpoint(epoch, 'final_checkpoint.pth')

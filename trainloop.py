@@ -5,9 +5,10 @@ import tqdm
 
 
 class Trainer:
-  def __init__(self, network, loss_function):
+  def __init__(self, network, loss_function, writer):
     self.network = network
     self.loss_function = loss_function
+    self.writer = writer
     
     self.init_optimizer()
     self.init_scheduler()
@@ -38,6 +39,7 @@ class Trainer:
       # If we are training, zero out the gradients in the network
       if training:
         self.optim.zero_grad()
+
 
       # Do one forward pass
       lstm = self.network(batch)
@@ -70,8 +72,10 @@ class Trainer:
           self.optim.step()
 
           #self.validate(val_dataloader)     
+          avg_loss = 1000.0 * total_loss / cnt
+          self.writer.add_scalar('Loss/train', avg_loss, epoch)
 
-    return 1000.0 * total_loss / cnt, 100.0*correct/cnt
+    return avg_loss, 100.0*correct/cnt
 
   def validate(self, val_dataloader, epoch=0):
         
@@ -100,3 +104,14 @@ class Trainer:
 
         # Print validation loss and accuracy
         print(f'Validation Loss: {total_loss/cnt}, Validation Accuracy: {correct/cnt}')
+
+        avg_loss = 1000.0 * total_loss / cnt
+        self.writer.add_scalar('Loss/val', avg_loss, epoch)
+        return avg_loss, 100.0*correct/cnt
+
+  def save_checkpoint(self, epoch, path):
+    torch.save({
+            'epoch': epoch,
+            'model_state_dict': self.network.state_dict(),
+            'optimizer_state_dict': self.optim.state_dict(),
+            }, path)
