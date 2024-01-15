@@ -73,9 +73,12 @@ class Trainer:
 
           #self.validate(val_dataloader)     
           avg_loss = 1000.0 * total_loss / cnt
+          avg_acc = 100.0*correct/cnt
+          self.writer.add_scalar('Acc/train', avg_acc, epoch)
           self.writer.add_scalar('Loss/train', avg_loss, epoch)
+          self.writer.add_graph(self.network, batch)
 
-    return avg_loss, 100.0*correct/cnt
+    return avg_loss, avg_acc
 
   def validate(self, val_dataloader, epoch=0):
         
@@ -106,8 +109,11 @@ class Trainer:
         print(f'Validation Loss: {total_loss/cnt}, Validation Accuracy: {correct/cnt}')
 
         avg_loss = 1000.0 * total_loss / cnt
+        avg_acc = 100.0*correct/cnt
+        self.writer.add_scalar('Acc/val', avg_acc, epoch)
         self.writer.add_scalar('Loss/val', avg_loss, epoch)
-        return avg_loss, 100.0*correct/cnt
+        self.writer.add_graph(self.network, batch)
+        return avg_loss, avg_acc
 
   def save_checkpoint(self, epoch, path):
     torch.save({

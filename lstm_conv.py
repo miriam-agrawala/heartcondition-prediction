@@ -6,9 +6,9 @@ class Net(nn.Module):
         super().__init__()
  
         self.conv = nn.Sequential(
-            nn.Conv2d(12, 24, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), nn.Dropout(0.2),#, nn.BatchNorm2d(24),
-            nn.Conv2d(24, 48, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), nn.Dropout(0.5),#, nn.BatchNorm2d(48),
-            nn.Conv2d(48, 96, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), nn.Dropout(0.5),#, nn.BatchNorm2d(96),
+            nn.Conv2d(12, 24, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), #nn.Dropout(0.2),#, nn.BatchNorm2d(24),
+            nn.Conv2d(24, 48, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), #nn.Dropout(0.5),#, nn.BatchNorm2d(48),
+            nn.Conv2d(48, 96, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), #nn.Dropout(0.5),#, nn.BatchNorm2d(96),
             )
       
         
