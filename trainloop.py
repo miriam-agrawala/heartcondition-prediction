@@ -34,6 +34,8 @@ class Trainer:
     correct = 0
     cnt = 0
 
+    correct_class = [0,0,0,0,0]
+    total_class = [0,0,0,0,0]
     # Iterate over the whole epoch
     for batch, labels in bar:
       # If we are training, zero out the gradients in the network
@@ -54,6 +56,11 @@ class Trainer:
       total_loss += loss.item()
 
       # Count how many correct predictions we have (for accuracy)
+      for cls_idx in range(5):
+        mask = (labels==cls_idx)
+        correct_class[cls_idx] += torch.sum(torch.argmax(lstm[mask, :]) == cls_idx)
+        total_class[cls_idx] += torch.sum(mask)
+
       correct += torch.sum(torch.argmax(lstm, dim=1) == labels).item()
 
       # Count total samples processed
@@ -77,6 +84,12 @@ class Trainer:
           self.writer.add_scalar('Acc/train', avg_acc, epoch)
           self.writer.add_scalar('Loss/train', avg_loss, epoch)
           self.writer.add_graph(self.network, batch)
+
+    bacc = 0
+    for cls_idx in range(5):
+      bacc += correct_class[cls_idx] / total_class[cls_idx]
+
+    bacc /= 5
 
     return avg_loss, avg_acc
 
