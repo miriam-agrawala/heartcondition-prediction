@@ -2,8 +2,6 @@ import torch
 import torch.nn as nn
 import tqdm
 
-
-
 class Trainer:
   def __init__(self, network, loss_function, writer):
     self.network = network

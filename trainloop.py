@@ -52,7 +52,7 @@ class Trainer:
 
       # Calculcate the (BCE)-Loss
       loss = self.loss_function(lstm, labels)
-      print("HERE LOSS ->", loss, "<- HERE LOSS")
+      #print("HERE LOSS ->", loss, "<- HERE LOSS")
 
       # Sum the total loss
       total_loss += loss.item()
@@ -101,7 +101,7 @@ class Trainer:
           self.writer.add_scalar('Acc/val', avg_acc, epoch)
           self.writer.add_scalar('Loss/val', avg_loss, epoch)
           self.writer.add_scalar('Bacc/val', bacc, epoch)
-      return avg_loss, avg_acc
+    return avg_loss, avg_acc
 
   # def validate(self, val_dataloader, epoch=0):
         
