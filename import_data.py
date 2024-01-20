@@ -11,9 +11,9 @@ np.set_printoptions(threshold=np.inf)
 pd.set_option("display.max_rows", None)
 pd.set_option("display.max_columns", None)
 
-#path_data_csv = r"C:\Users\magra\Documents\HSD\5_Semester\Advances_AI\Project\ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.3\ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.3"
+path_data_csv = r"C:\Users\magra\Documents\HSD\5_Semester\Advances_AI\Project\ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.3\ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.3"
 #path_data_csv = r"C:\Users\magra\Documents\5_Semester\Advances_AI\ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.3\ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.3"
-path_data_csv =r"/home/miriam/ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.3"
+#path_data_csv =r"/home/miriam/ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.3"
 
 ptbxl = pd.read_csv(os.path.join(path_data_csv, "ptbxl_database.csv"))
 print(ptbxl.head(5))

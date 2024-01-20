@@ -27,11 +27,10 @@ if __name__ == "__main__":
 
 
     #dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
-    train_loader = DataLoader(train_dataset, batch_size=256, shuffle=True)
-    batch = next(iter(train_loader))
-    print(batch[0].shape)
-    print(batch[1].shape)
-    val_loader = DataLoader(val_dataset, batch_size=256, shuffle=False)
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+
+
+    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
 
     # for batch in dataloader:
     #   data_batch, label_batch = batch
@@ -44,7 +43,7 @@ if __name__ == "__main__":
     trainer = Trainer(net, loss, writer)
     #trainer.epoch(dataloader, net, True)
 
-    num_epochs = 1000  # number of epochs
+    num_epochs = 100  # number of epochs
     # for epoch in range(num_epochs):
     #     trainer.epoch(dataloader, net, True)
     
@@ -53,7 +52,7 @@ if __name__ == "__main__":
         trainer.epoch(train_loader, True, epoch)
 
         # Validation phase
-        trainer.validate(val_loader, epoch)
+        trainer.epoch(val_loader, False, epoch)
         # net.eval()  # set the model to evaluation mode
         # total_val_loss = 0
         # with torch.no_grad():  # disable gradient computation
