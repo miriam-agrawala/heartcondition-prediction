@@ -27,10 +27,10 @@ if __name__ == "__main__":
 
 
     #dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
-    train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True)
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 
 
-    val_loader = DataLoader(val_dataset, batch_size=16, shuffle=False)
+    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
 
     # for batch in dataloader:
     #   data_batch, label_batch = batch

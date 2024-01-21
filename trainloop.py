@@ -95,7 +95,7 @@ class Trainer:
           self.writer.add_scalar('Loss/train', avg_loss, epoch)
           self.writer.add_scalar('Bacc/train', bacc, epoch)
           # Log the network graph to TensorBoard
-          self.writer.add_graph(self.network, batch)
+          #self.writer.add_graph(self.network, batch)
       else:
           # Log the average loss and accuracy for validation
           self.writer.add_scalar('Acc/val', avg_acc, epoch)

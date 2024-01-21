@@ -9,8 +9,8 @@ class Net(nn.Module):
             nn.Conv2d(12, 24, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), #nn.Dropout(0.2),#, nn.BatchNorm2d(24),
             nn.Conv2d(24, 48, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), #nn.Dropout(0.5),#, nn.BatchNorm2d(48),
             nn.Conv2d(48, 96, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), #nn.Dropout(0.5),#, nn.BatchNorm2d(96),
-            # nn.Conv2d(96, 192, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), #nn.Dropout(0.5),#, nn.BatchNorm2d(96),
-            # nn.Conv2d(192, 384, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), #nn.Dropout(0.5),#, nn.BatchNorm2d(96),
+            #nn.Conv2d(96, 192, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), #nn.Dropout(0.5),#, nn.BatchNorm2d(96),
+            #nn.Conv2d(192, 384, kernel_size=(10,1), stride=(2,1)), nn.ReLU(), #nn.Dropout(0.5),#, nn.BatchNorm2d(96),
          
             )
       
@@ -27,7 +27,7 @@ class Net(nn.Module):
         x = x.view(BS,118,96)
 
         out, hidden = self.lstm(x)
-        #out = self.dropout(out)
+        out = self.dropout(out)
          
         return self.fc(out[:,-1,:])
  
