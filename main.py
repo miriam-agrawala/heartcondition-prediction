@@ -1,4 +1,4 @@
-from dataset import ECGDatasetUpdate, DEVICE, ECGDataset200ms
+from dataset import ECGDatasetUpdate, DEVICE, ECGDataset200ms, ECGDatasetRandomStart
 from import_data import train_featurevector, val_featurevector
 from torch.utils.data import Dataset, DataLoader
 from lstm2 import LSTM2
