@@ -5,6 +5,7 @@ import wfdb
 import tqdm
 import os
 import random
+import math
 from import_data import path_data_csv, prelim_featurevector
 
 
@@ -109,7 +110,7 @@ class ECGDatasetRandomStart(torch.utils.data.Dataset):
   
   def __getitem__(self, idx):
     #for idx in tqdm.tqdm(range(100)):
-    start = random.uniform(0,200)
+    start = math.floor(random.uniform(0,200))
     return self.ecg[idx, start:(start+800), :], self.labels[idx]
     #return self.ecg[idx, :, :], self.labels[idx]
     #return self.ecg[idx:(idx+self.seqlen)], self.labels[idx+self.seqlen]
