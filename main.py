@@ -54,6 +54,8 @@ if __name__ == "__main__":
         # Validation phase
         trainer.epoch(val_loader, False, epoch)
 
+        #trainer.scheduler.step()
+
         # net.eval()  # set the model to evaluation mode
         # total_val_loss = 0
         # with torch.no_grad():  # disable gradient computation

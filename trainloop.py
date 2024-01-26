@@ -12,11 +12,17 @@ class Trainer:
     self.init_optimizer()
     self.init_scheduler()
 
+  # def init_optimizer(self):
+  #   self.optim = torch.optim.Adam(self.network.parameters(), lr=0.0001)
+
   def init_optimizer(self):
-    self.optim = torch.optim.Adam(self.network.parameters(), lr=0.0001)
+    self.optim = torch.optim.AdamW(self.network.parameters(), lr=0.0001, weight_decay=0.01)
+
+  # def init_scheduler(self):
+  #   self.scheduler = torch.optim.lr_scheduler.ExponentialLR(self.optim, 0.95)
 
   def init_scheduler(self):
-    self.scheduler = torch.optim.lr_scheduler.ExponentialLR(self.optim, 0.95)
+    self.scheduler = torch.optim.lr_scheduler.StepLR(self.optim, step_size=30, gamma=0.1)
 
   def epoch(self, dataloader, training, epoch=0):
     # We want a dedicated TQDM bar, so we can set the description after each step
