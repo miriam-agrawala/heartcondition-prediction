@@ -4,6 +4,7 @@ from torch.utils.data import Dataset, DataLoader
 from lstm2 import LSTM2
 from trainloop import Trainer
 from lstm_conv import Net
+from transformer import TransformerModel
 import torch
 
 from torch.utils.tensorboard import SummaryWriter  
@@ -20,10 +21,10 @@ if __name__ == "__main__":
     # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     print("Loading trainset...")
-    train_dataset = ECGDatasetRandomStart(train_featurevector)
+    train_dataset = ECGDatasetUpdate(train_featurevector)
    
     print("Loading valset...")
-    val_dataset = ECGDatasetRandomStart(val_featurevector)
+    val_dataset = ECGDatasetUpdate(val_featurevector)
 
 
     #dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
@@ -37,7 +38,9 @@ if __name__ == "__main__":
 
     #   # Move the data batch to the same device as the model
     #   data_batch, label_batch = data_batch.to(device), label_batch.to(device)
-    net = Net().to(DEVICE)
+
+    #net = Net().to(DEVICE)
+    net = TransformerModel(input_dim=12, output_dim=5, d_model=256, nhead=8, num_layers=2).to(DEVICE)
     loss = torch.nn.CrossEntropyLoss()
 
     trainer = Trainer(net, loss, writer)
