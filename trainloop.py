@@ -80,13 +80,16 @@ class Trainer:
         if total_class[cls_idx] != 0:
           bacc += correct_class[cls_idx] / total_class[cls_idx]
       bacc /= 5
+      # turn into percentage
+      bacc *= 100
+    
 
       # Calculaate average loss and accuracy    
       avg_loss = 1000.0 * total_loss / cnt
       avg_acc = 100.0*correct/cnt
 
       # Update bar description
-      bar.set_description(f"ep: {epoch:.0f} ({name}), loss: {avg_loss:.3f}, acc: {avg_acc:.2f}%, bacc: {100.0*bacc:.2f}%")
+      bar.set_description(f"ep: {epoch:.0f} ({name}), loss: {avg_loss:.3f}, acc: {avg_acc:.2f}%, bacc: {bacc:.2f}%")
 
       # If we are training, do backward pass 
       if training:
@@ -107,7 +110,7 @@ class Trainer:
           self.writer.add_scalar('Acc/val', avg_acc, epoch)
           self.writer.add_scalar('Loss/val', avg_loss, epoch)
           self.writer.add_scalar('Bacc/val', bacc, epoch)
-    return avg_loss, avg_acc
+    return avg_loss, avg_acc, bacc
 
   # def validate(self, val_dataloader, epoch=0):
         

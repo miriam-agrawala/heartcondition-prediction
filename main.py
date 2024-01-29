@@ -3,8 +3,9 @@ from import_data import train_featurevector, val_featurevector
 from torch.utils.data import Dataset, DataLoader
 from lstm2 import LSTM2
 from trainloop import Trainer
-from lstm_conv import Net
-from transformer import TransformerModel
+from lstm_conv import LSTM_Conv
+#from trainloop import val_bacc
+from transformer2 import Transformer
 import torch
 
 from torch.utils.tensorboard import SummaryWriter  
@@ -39,8 +40,9 @@ if __name__ == "__main__":
     #   # Move the data batch to the same device as the model
     #   data_batch, label_batch = data_batch.to(device), label_batch.to(device)
 
-    #net = Net().to(DEVICE)
-    net = TransformerModel(input_dim=12, output_dim=5, d_model=256, nhead=8, num_layers=2).to(DEVICE)
+    net = LSTM_Conv().to(DEVICE)
+    net_name = net.__class__.__name__
+    #net = Transformer(input_dim=12, output_dim=5, d_model=256, nhead=8, num_layers=2).to(DEVICE)
     loss = torch.nn.CrossEntropyLoss()
 
     trainer = Trainer(net, loss, writer)
@@ -55,7 +57,12 @@ if __name__ == "__main__":
         trainer.epoch(train_loader, True, epoch)
 
         # Validation phase
-        trainer.epoch(val_loader, False, epoch)
+        #trainer.epoch(val_loader, False, epoch)
+        _, _, val_bacc = trainer.epoch(val_loader, False, epoch)
+        
+        checkpoint_filename = f"checkpoint_epoch_{epoch}_bacc_{val_bacc:.2f}_net_{net_name}.pth"
+        trainer.save_checkpoint(epoch, checkpoint_filename)
+        #trainer.save_checkpoint(epoch, 'final_checkpoint.pth')
 
         #trainer.scheduler.step()
 
@@ -69,4 +76,3 @@ if __name__ == "__main__":
         #         total_val_loss += val_loss.item()
 
         # avg_val_loss = total_val_loss / len(val_loader)  # compute the average validation loss
-    trainer.save_checkpoint(epoch, 'final_checkpoint.pth')
