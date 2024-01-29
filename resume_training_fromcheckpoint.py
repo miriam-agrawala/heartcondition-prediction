@@ -19,27 +19,41 @@ writer = SummaryWriter()
 
 
 # Define the path to your checkpoint
-url = 'https://drive.google.com/uc?id=1-0Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z'
+url = 'https://drive.google.com/file/d/1RJPRdnmoYSN-vt_TqVuxuLGph-kIavdp/view?usp=drive_link'
 output = "checkpoint.pth"
-gdown.download(url, output, quiet=False)
+gdown.download(url=url, output=output, quiet=False, fuzzy=True)
+
+print("Checkpointfile downloaded")
 
 # Initialize the model and optimizer
 model = LSTM_2stacked().to(DEVICE)
-optimizer = torch.optim.Adam(model.parameters())
+optimizer = torch.optim.AdamW(model.parameters())
+
+print("Model and Optimizer initialized")
 
 # Load the checkpoint
 checkpoint = torch.load(output)
+
+print("Checkpoint loaded")
 
 # Load the state dict into the model and optimizer
 model.load_state_dict(checkpoint['model_state_dict'])
 optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
 
+print("Model and Optimizer loaded")
+
 # If the checkpoint includes the epoch number, load it
 start_epoch = checkpoint.get('epoch', 0)
 
-# Continue with the rest of your main.py code
-train_loader = DataLoader(ECGDatasetUpdate, batch_size=32, shuffle=True)
-val_loader = DataLoader(ECGDatasetUpdate, batch_size=32, shuffle=False)
+print("Loading trainset...")
+train_dataset = ECGDatasetUpdate(train_featurevector)
+   
+print("Loading valset...")
+val_dataset = ECGDatasetUpdate(val_featurevector)
+
+#dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
 
 loss = torch.nn.CrossEntropyLoss()
 trainer = Trainer(model, loss, writer)
