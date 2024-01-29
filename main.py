@@ -1,9 +1,11 @@
 from dataset import ECGDatasetUpdate, DEVICE, ECGDataset200ms, ECGDatasetRandomStart
 from import_data import train_featurevector, val_featurevector
 from torch.utils.data import Dataset, DataLoader
-from lstm2 import LSTM2
+from lstm import LSTM
 from trainloop import Trainer
 from lstm_conv import LSTM_Conv
+from lstm_2layers_stacked import LSTM_2stacked
+from lstm_3layers_stacked import LSTM_3stacked
 #from trainloop import val_bacc
 from transformer2 import Transformer
 import torch
@@ -40,7 +42,7 @@ if __name__ == "__main__":
     #   # Move the data batch to the same device as the model
     #   data_batch, label_batch = data_batch.to(device), label_batch.to(device)
 
-    net = LSTM_Conv().to(DEVICE)
+    net = LSTM_3stacked().to(DEVICE)
     net_name = net.__class__.__name__
     #net = Transformer(input_dim=12, output_dim=5, d_model=256, nhead=8, num_layers=2).to(DEVICE)
     loss = torch.nn.CrossEntropyLoss()
