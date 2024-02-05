@@ -24,17 +24,17 @@ if __name__ == "__main__":
     # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     print("Loading trainset...")
-    train_dataset = ECGDatasetUpdate(train_featurevector)
+    train_dataset = ECGDatasetRandomStart(train_featurevector)
    
     print("Loading valset...")
-    val_dataset = ECGDatasetUpdate(val_featurevector)
+    val_dataset = ECGDatasetRandomStart(val_featurevector)
 
 
     #dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
-    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+    train_loader = DataLoader(train_dataset, batch_size=512, shuffle=True)
 
 
-    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
+    val_loader = DataLoader(val_dataset, batch_size=512, shuffle=False)
 
     # for batch in dataloader:
     #   data_batch, label_batch = batch
@@ -42,7 +42,7 @@ if __name__ == "__main__":
     #   # Move the data batch to the same device as the model
     #   data_batch, label_batch = data_batch.to(device), label_batch.to(device)
 
-    net = LSTM_3stacked().to(DEVICE)
+    net = LSTM_Conv().to(DEVICE)
     net_name = net.__class__.__name__
     #net = Transformer(input_dim=12, output_dim=5, d_model=256, nhead=8, num_layers=2).to(DEVICE)
     loss = torch.nn.CrossEntropyLoss()
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     trainer = Trainer(net, loss, writer)
     #trainer.epoch(dataloader, net, True)
 
-    num_epochs = 100  # number of epochs
+    num_epochs = 1000  # number of epochs
     # for epoch in range(num_epochs):
     #     trainer.epoch(dataloader, net, True)
     

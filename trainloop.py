@@ -12,14 +12,14 @@ class Trainer:
     self.init_optimizer()
     self.init_scheduler()
 
-  # def init_optimizer(self):
-  #   self.optim = torch.optim.Adam(self.network.parameters(), lr=0.0001)
+  #def init_optimizer(self):
+  #  self.optim = torch.optim.Adam(self.network.parameters(), lr=0.0001)
 
   def init_optimizer(self):
-    self.optim = torch.optim.AdamW(self.network.parameters(), lr=0.0001, weight_decay=0.01)
+    self.optim = torch.optim.AdamW(self.network.parameters(), lr=0.0001, weight_decay=0.1)
 
-  # def init_scheduler(self):
-  #   self.scheduler = torch.optim.lr_scheduler.ExponentialLR(self.optim, 0.95)
+  #def init_scheduler(self):
+  #  self.scheduler = torch.optim.lr_scheduler.ExponentialLR(self.optim, 0.95)
 
   def init_scheduler(self):
     self.scheduler = torch.optim.lr_scheduler.StepLR(self.optim, step_size=30, gamma=0.1)
@@ -95,17 +95,17 @@ class Trainer:
       if training:
           # Calculcate backward gradiesnts
           loss.backward()
-
           # Step the optimizer
           self.optim.step()
 
+    if training:
           # Log the average loss and accuracy to TensorBoard
           self.writer.add_scalar('Acc/train', avg_acc, epoch)
           self.writer.add_scalar('Loss/train', avg_loss, epoch)
           self.writer.add_scalar('Bacc/train', bacc, epoch)
           # Log the network graph to TensorBoard
           #self.writer.add_graph(self.network, batch)
-      else:
+    else:
           # Log the average loss and accuracy for validation
           self.writer.add_scalar('Acc/val', avg_acc, epoch)
           self.writer.add_scalar('Loss/val', avg_loss, epoch)
