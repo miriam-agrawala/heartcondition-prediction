@@ -65,7 +65,7 @@ loss = torch.nn.CrossEntropyLoss()
 trainer = Trainer(model, loss, writer)
 
 # Start the epochs from where the checkpoint left off
-for epoch in range(start_epoch, 100):
+for epoch in range(start_epoch, 1000):
     # Training phase
     trainer.epoch(train_loader, True, epoch)
 
