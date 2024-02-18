@@ -17,8 +17,8 @@ To train a network, only main.py needs to be executed. In the version in which t
 
 Alternatively, various changes can be made to the code in order to change the model in the desired way: 
 
-In line 35 of “main.py”, the "net" variable can be set equal to the network architecture that you want to test. You can choose between "LSTM", "LSTM_2stacked", "LSTM_3stacked", "LSTM_3Conv" and "LSTM_5Conv". 
-The dataset can also be exchanged in lines 25 and 28 of “main.py”; "ECGDatasetUpdate" (standard dataset), "ECGDataset200" (last 200 data points) and "ECGDatasetRandomStart" are available.
+In line 36 of “main.py”, the "net" variable can be set equal to the network architecture that you want to test. You can choose between "LSTM", "LSTM_2stacked", "LSTM_3stacked", "LSTM_3Conv" and "LSTM_5Conv". 
+The dataset can also be exchanged in lines 26 and 29 of “main.py”; "ECGDatasetUpdate" (standard dataset), "ECGDataset200" (last 200 data points) and "ECGDatasetRandomStart" are available.
 
 In addition, by varying lines 14-16 (Adam) or 18-20 (AdamW) in the “trainloop.py file”, different variations of the optimisers, their learning rates and the weight decay can be tested.
 
