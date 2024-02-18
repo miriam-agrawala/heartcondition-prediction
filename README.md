@@ -36,6 +36,47 @@ Furthermore, various checkpoints are provided, which can simply be loaded into t
 
 Using checkpoints, the network can be further trained from the point with the best balanced accuracy on 1000 epochs (in the validation data set). 
 
-The following table contains all tested variations for which there are checkpoints. The correct URL for the checkpoint can be selected from the list below using the Network_ID in the first column of the table. 
+The following table contains all tested variations for which there are checkpoints. The correct URL for the checkpoint can be selected from the list below using the Network_ID in the first column of the table. In the list below, the Network_ID is written first, followed by a ":" and the link for the URL for the checkpoint.
 
-This can be used in line 23 of the file "resume_training_fromcheckpoint.py" for the url variable. As soon as the network has been adapted according to the respective checkpoint, the training can be continued by starting the script.
+![alt_text](https://github.com/miriam-agrawala/heartcondition-prediction/blob/main/Table_Networkarchitectures.PNG)
+
+1: https://drive.google.com/file/d/1f1DndXamNG1kGk3EMWdcMwNUjzm1I4Gc/view?usp=sharing
+
+2: https://drive.google.com/file/d/1G20LqwqiAmuD7jvxEwgkHxqFIl9p5eB_/view?usp=sharing
+
+3: https://drive.google.com/file/d/1hFZKTqr8-hYr5dOuJl7ylP9vWTIuDn3R/view?usp=sharing
+
+4: https://drive.google.com/file/d/1on2i0BYpaoohPYMNpbTFZ0yAStfzVdD1/view?usp=sharing
+
+5: [https://drive.google.com/file/d/1jcVWqww3sdLMDtnRmZrOnKpsZHaW8p5W/view?usp=sharing
+
+6: https://drive.google.com/file/d/1IX5yBQsAEWbdcafAt82RyfJedDW096DJ/view?usp=sharing
+
+7: https://drive.google.com/file/d/122tBwQEa03DFzRkWIR6h-zzADFXgczpR/view?usp=sharing
+
+8: https://drive.google.com/file/d/1KhdiTWf-zFOCmKFL32N9d16mwUxv5KcT/view?usp=sharing
+
+9: https://drive.google.com/file/d/1g6eIRhC2qivE2TbyQWfzA-0ueHT4cLON/view?usp=sharing
+
+10: https://drive.google.com/file/d/1utmAXmyjanYku6r02mN8o5qSuKxci1GS/view?usp=sharing
+
+11: https://drive.google.com/file/d/17dgIrdSdoLuuCvtrL8s2dpBSUzyttQmZ/view?usp=sharing
+
+12: https://drive.google.com/file/d/1uMIThfnyuf_joqcqLhcaGJ8K1lkmco4L/view?usp=sharing
+
+13: https://drive.google.com/file/d/1O5qI_K9luViq1gBEk_yDmxIvMWVV2nhp/view?usp=sharing
+
+14: https://drive.google.com/file/d/1bJ55FkklesbSerCY69Gfuwbg-KdOLlCw/view?usp=sharing
+
+15: https://drive.google.com/file/d/17xoyBCYhg0hDRxSeZfypDt64ahrIbUhI/view?usp=sharing
+
+16: https://drive.google.com/file/d/19zY1y1jxKNAIE4F7z2C0tvqeU32Qn_Dk/view?usp=sharing
+
+17: https://drive.google.com/file/d/1DyRUE7o9CzDrD04A6KQqWAGPveepMoXa/view?usp=sharing
+
+18: https://drive.google.com/file/d/1zh8hB4ACUQvF4Y576t6R5u4XMsxOyUSh/view?usp=sharing
+
+
+These links can be used in line 23 of the file "resume_training_fromcheckpoint.py" for the url variable. As soon as the network has been adapted according to the respective checkpoint, the training can be continued by starting the script.
+
+
