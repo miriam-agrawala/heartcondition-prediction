@@ -1,7 +1,7 @@
 # import necessary libraries
 import torch.nn as nn
 
-class LSTM_Conv(nn.Module):
+class LSTM_3Conv(nn.Module):
     def __init__(self):
         super().__init__()
  

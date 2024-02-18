@@ -13,7 +13,8 @@ from import_data import train_featurevector, val_featurevector
 from lstm import LSTM
 from lstm_2layers_stacked import LSTM_2stacked
 from lstm_3layers_stacked import LSTM_3stacked
-from lstm_conv import LSTM_Conv
+from lstm_3conv import LSTM_3Conv
+from lstm_5conv import LSTM_5Conv
 
 # Initialize the tensorboard writer
 writer = SummaryWriter()
@@ -27,7 +28,7 @@ gdown.download(url=url, output=output, quiet=False, fuzzy=True)
 print("Checkpointfile downloaded")
 
 # Initialize the model and move it to the device (CPU or GPU)
-model = LSTM_Conv().to(DEVICE)
+model = LSTM_3Conv().to(DEVICE)
 # Initialize the optimizer with the model's parameters
 optimizer = torch.optim.AdamW(model.parameters())
 

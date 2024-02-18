@@ -12,7 +12,8 @@ from trainloop import Trainer
 from lstm import LSTM
 from lstm_2layers_stacked import LSTM_2stacked
 from lstm_3layers_stacked import LSTM_3stacked
-from lstm_conv import LSTM_Conv
+from lstm_3conv import LSTM_3Conv
+from lstm_5conv import LSTM_5Conv
 
 # Initialize a SummaryWriter for TensorBoard
 writer = SummaryWriter()
@@ -22,17 +23,17 @@ if __name__ == "__main__":
 
     # Load training dataset
     print("Loading trainset...")
-    train_dataset = ECGDataset200(train_featurevector)
+    train_dataset = ECGDatasetRandomStart(train_featurevector)
     # Load validation dataset
     print("Loading valset...")
-    val_dataset = ECGDataset200(val_featurevector)
+    val_dataset = ECGDatasetRandomStart(val_featurevector)
 
     # Create data loaders for training and validation datasets
-    train_loader = DataLoader(train_dataset, batch_size=512, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=512, shuffle=False)
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
 
     # Initialize the model and move it to the device (CPU or GPU)
-    net = LSTM_Conv().to(DEVICE)
+    net = LSTM_3Conv().to(DEVICE)
     # net_name is used for naming the checkpoint files
     net_name = net.__class__.__name__
 
