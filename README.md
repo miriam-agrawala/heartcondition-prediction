@@ -1,7 +1,7 @@
 ## Introduction
 The code in this repository is intended to predict various diagnoses based on AI from 10-second ECG sequences. Different combinations of LSTM and CNN architectures were used. Furthermore, different variations of optimisers, learning rate schedulers, dropout and batch normalisation were used.
 
-The training was tested on three different datasets: a standard dataset with 10 second sequences on 12 ECG channels, a modified dataset containing only the last 2 seconds of the standard dataset and finally one dataset containing 8 seconds of the standard dataset with the start of the 8 second sequence randomised. All datasets were derived from the PTB-XL ECG dataset on PhysioNet.
+The training was tested on three different datasets: a standard dataset with 10 second sequences on 12 ECG channels, a modified dataset containing only the last 2 seconds of the standard dataset and finally one dataset containing 8 seconds of the standard dataset with the start of the 8 second sequence randomised. All datasets were derived from the [PTB-XL ECG dataset on PhysioNet](https://physionet.org/content/ptb-xl/1.0.3/).
 
 ## How to use this repository
 
