@@ -22,10 +22,10 @@ if __name__ == "__main__":
 
     # Load training dataset
     print("Loading trainset...")
-    train_dataset = ECGDatasetRandomStart(train_featurevector)
+    train_dataset = ECGDataset200(train_featurevector)
     # Load validation dataset
     print("Loading valset...")
-    val_dataset = ECGDatasetRandomStart(val_featurevector)
+    val_dataset = ECGDataset200(val_featurevector)
 
     # Create data loaders for training and validation datasets
     train_loader = DataLoader(train_dataset, batch_size=512, shuffle=True)

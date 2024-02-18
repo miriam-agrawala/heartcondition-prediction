@@ -7,7 +7,7 @@ from torch.utils.data import Dataset, DataLoader
 from torch.utils.tensorboard import SummaryWriter  
 
 # Import custom modules
-from dataset import ECGDatasetUpdate, DEVICE, ECGDataset200, ECGDatasetRandomStart
+from dataset import DEVICE, ECGDatasetUpdate, ECGDataset200, ECGDatasetRandomStart
 from trainloop import Trainer
 from import_data import train_featurevector, val_featurevector
 from lstm import LSTM
@@ -27,7 +27,7 @@ gdown.download(url=url, output=output, quiet=False, fuzzy=True)
 print("Checkpointfile downloaded")
 
 # Initialize the model and move it to the device (CPU or GPU)
-model = LSTM_2stacked().to(DEVICE)
+model = LSTM_Conv().to(DEVICE)
 # Initialize the optimizer with the model's parameters
 optimizer = torch.optim.AdamW(model.parameters())
 
@@ -49,11 +49,10 @@ start_epoch = checkpoint.get('epoch', 0)
 
 print("Loading trainset...")
 # Load the training dataset
-train_dataset = ECGDatasetUpdate(train_featurevector)
-   
+train_dataset = ECGDatasetRandomStart(train_featurevector)  
 print("Loading valset...")
 # Load the validation dataset
-val_dataset = ECGDatasetUpdate(val_featurevector)
+val_dataset = ECGDatasetRandomStart(val_featurevector)
 
 # Create data loaders for training and validation datasets
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)

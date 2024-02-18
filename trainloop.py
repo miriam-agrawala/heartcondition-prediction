@@ -11,12 +11,13 @@ class Trainer:
       self.init_optimizer()
       self.init_scheduler()
 
-    def init_optimizer(self):
-      # Initialize the optimizer as Adam
-      self.optim = torch.optim.Adam(self.network.parameters(), lr=0.0001)
-
     # def init_optimizer(self):
-    #   self.optim = torch.optim.AdamW(self.network.parameters(), lr=0.0001, weight_decay=0.1)
+    #   # Initialize the optimizer as Adam
+    #   self.optim = torch.optim.Adam(self.network.parameters(), lr=0.0001)
+
+    def init_optimizer(self):
+      # Initialize the optimizer as AdamW
+      self.optim = torch.optim.AdamW(self.network.parameters(), lr=0.0001, weight_decay=0.1)
 
     def init_scheduler(self):
       # Initialize the LR scheduler as ExponentialLR
