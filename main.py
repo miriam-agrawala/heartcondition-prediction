@@ -43,7 +43,7 @@ if __name__ == "__main__":
     # Initialize the Trainer with the model, loss function, and writer
     trainer = Trainer(net, loss, writer)
     
-    num_epochs = 10  # number of epochs
+    num_epochs = 100  # number of epochs
     
     # Training loop
     for epoch in range(num_epochs):

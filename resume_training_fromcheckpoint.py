@@ -20,7 +20,7 @@ from lstm_5conv import LSTM_5Conv
 writer = SummaryWriter()
 
 # Define the URL to the checkpoint file on Google Drive
-url = 'https://drive.google.com/file/d/1RJPRdnmoYSN-vt_TqVuxuLGph-kIavdp/view?usp=drive_link'
+url = 'https://drive.google.com/file/d/19zY1y1jxKNAIE4F7z2C0tvqeU32Qn_Dk/view?usp=sharing'
 output = "checkpoint.pth"
 # Download the checkpoint file using gdown
 gdown.download(url=url, output=output, quiet=False, fuzzy=True)
