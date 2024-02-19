@@ -9,7 +9,7 @@ Please follow these instructions, to use the code:
 
 Firstly, the repository is to be cloned. Furthermore, the PTB-XL data set must be downloaded from [PhysioNet](https://physionet.org/content/ptb-xl/1.0.3/).
 
-In a terminal, run "pip install -r local_path_to_cloned_repository/requirements.txt" in the coding environment in which you want to use the code. This will install the required Python libraries. Replace "local_path_to_cloned_repository" with your own path.
+In a conda terminal, navigate to the folder in which you have saved the repository. Then run "conda env create -f environment.yml" to create an environment in which all necessary python libraries are downloaded automatically.
 
 In “import_data.py”, the path for importing the training data has to be adapted. Please insert the path that points to the folder in which the folders for the 100Hz and 500Hz recordings are located (see code example lines 16-18).
 
